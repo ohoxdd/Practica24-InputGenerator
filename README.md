@@ -15,4 +15,3 @@ Meterlo en la carpeta donde se encuentra el script con el nombre correct.exe, y 
 Ejecutad el script y comparará todos los outputs hasta que encuentre diferencias.
 
 (Nota: si por temas de permisos no deja ejecutar el script, ejecutad el comando "chmod +x cmp.sh")
-Toda información sobre como modificar los datos se encuentra en los comentarios de src.cc
