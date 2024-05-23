@@ -52,8 +52,8 @@ int main() {
 
     generate_tree(dis(gen));
     
-    std::cout << dis(gen)%nprod << ' ' << dis(gen) << std::endl;
-    std::cout << dis(gen)%nprod << ' ' << dis(gen)%25 << std::endl;
+    std::cout << dis(gen)%nprod + 1 << ' ' << dis(gen) << std::endl;
+    std::cout << dis(gen)%nprod + 1 << ' ' << dis(gen)%25 << std::endl;
 
     std::cout << "// bucle" << std::endl;
 
