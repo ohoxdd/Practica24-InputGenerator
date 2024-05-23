@@ -1,12 +1,12 @@
 #!/bin/bash
 
-g++ -o samples/inputs samples/inputs.cc
+g++ -o InputGenerator.exe src.cc
 rm out.txt
 rm correct.txt
 while true; do
-    samples/inputs > samples/testinp.inp
-    ./program.exe < samples/testinp.inp > out.txt
-    ./correct.exe < samples/testinp.inp > correct.txt
+    ./InputGenerator.exe > gen_test.inp
+    ./program.exe < gen_test.inp > out.txt
+    ./correct.exe < gen_test.inp > correct.txt
     if !(cmp -s out.txt correct.txt); then
         break
     fi
