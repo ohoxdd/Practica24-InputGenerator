@@ -1,7 +1,7 @@
 # Practica24-InputGenerator
 Generador de inputs per la práctica de primavera 2024 PRO2
 
-Actualmente el programa está configurado para generar 1000 comandos.
+Actualmente el programa está configurado para generar 100 comandos.
 Este número es fácilmente customizable haciendo los respectivos cambios en src.cc.
 
 Se adjunta un script de bash el cual se encarga de ir generando inputs aleatoriamente.
