@@ -5,5 +5,4 @@ Todo comando necesario se puede hacer a través del Makefile:
   - make generate: Genera un nuevo caso de prueba
   - make clean: Limpia archivos de prueba
 
-Actualmente el programa está configurado para generar 1000 comandos.
-Este número es fácilmente customizable haciendo los respectivos cambios en src.cc.
+Toda información sobre como modificar los datos se encuentra en los comentarios de src.cc
