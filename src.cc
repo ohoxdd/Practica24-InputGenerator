@@ -9,7 +9,7 @@ std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_int_distribution<> dis(1, 200);
 std::vector<std::string> Ciudades;
-int nprod = dis(gen)%10 + 2;
+int nprod = dis(gen);
 
 std::string generate_random_string(size_t length) {
     auto randchar = []() -> char {
