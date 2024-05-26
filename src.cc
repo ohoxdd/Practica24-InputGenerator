@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <vector>
 #include <functional>
+#include <set>   
 
 std::random_device rd;
 std::mt19937 gen(rd());
@@ -44,32 +45,19 @@ void generate_tree(int depth) {
 }
 
 int main() {
-    // El número de productos está declarado globalmente.
     std::cout << nprod << std::endl;
 
-    // Modifica estos parametros para variar los pesos y volumenes de los productos.
     for (int i = 0; i < nprod; ++i) {
-        std::cout << dis(gen)%10 + 1 << " " << dis(gen)%10 + 1 << std::endl;
+        std::cout << dis(gen) << " " << dis(gen) << std::endl;
     }
-    
-    // Cambia este parametro para generar una longitud diferente del arbol.
-    // Es importante que te asegures que no metas 0, ya que se generaría un arbol vacío.
+
     generate_tree(dis(gen));
-
-    // Modifica estos parametros para variar los productos del barco
-    int id1 = dis(gen)%nprod + 1;
-    int id2 = dis(gen)%nprod + 1;
-    while (id1 == id2) {
-        id2 = dis(gen)%nprod + 1;
-    }
-
-    std::cout << id1 << ' ' << dis(gen) << std::endl;
-    std::cout << id2 << ' ' << dis(gen)%25 << std::endl;
+    
+    std::cout << dis(gen)%nprod + 1 << ' ' << dis(gen) << std::endl;
+    std::cout << dis(gen)%nprod + 1 << ' ' << dis(gen)%25 << std::endl;
 
     std::cout << "// bucle" << std::endl;
 
-    // Cada funcion es bastante autoexplicativa, cambia los parametros asegurandote de que no se accede a 
-    // una ciudad que no existe en leer_inventarios, por ejemplo.
     std::vector<std::function<void()>> commands =  {
         []() {
             std::cout << "escribir_barco" << std::endl;
@@ -77,7 +65,7 @@ int main() {
         []() {
             std::cout << "leer_rio" << std::endl;
             Ciudades.clear();
-            generate_tree(dis(gen)%5 +2);
+            generate_tree(dis(gen));
         },
         []() {
             std::cout << "leer_inventario" << ' ';
@@ -88,8 +76,14 @@ int main() {
             }
             int n = dis(gen)%9;
             std::cout << n << std::endl;
+            std::set<int> prods;
             for (int i = 0; i < n; ++i) {
-                std::cout << dis(gen)%nprod + 1 << ' ' 
+                int id = dis(gen)%nprod +1;
+                while (prods.find(id) != prods.end()) {
+                    id = dis(gen)%nprod + 1;
+                }
+                prods.insert(id);
+                std::cout << id << ' ' 
                             << dis(gen) << ' ' 
                             << dis(gen) << std::endl; 
             }
@@ -101,10 +95,16 @@ int main() {
                 std::cout << Ciudades[dis(gen)%Ciudades.size()] << std::endl;
                 int n = dis(gen)%9;
                 std::cout << n << std::endl;
+                std::set<int> prods;
                 for (int i = 0; i < n; ++i) {
-                    std::cout << dis(gen)%nprod + 1 << ' ' 
-                              << dis(gen) << ' ' 
-                              << dis(gen) << std::endl; 
+                    int id = dis(gen)%nprod +1;
+                    while (prods.find(id) != prods.end()) {
+                        id = dis(gen)%nprod + 1;
+                    }
+                    prods.insert(id);
+                    std::cout << id << ' ' 
+                                << dis(gen) << ' ' 
+                                << dis(gen) << std::endl; 
                 }
             }
             std::cout << "#" << std::endl;
@@ -140,7 +140,7 @@ int main() {
             std::cout << "escribir_ciudad" << ' ';
             if (roll() >= 10) std::cout << generate_random_string(5) << std::endl;
             else std::cout << Ciudades[dis(gen)%Ciudades.size()] << std::endl;
-        }, 
+        },
         []() {
             std::cout << "poner_prod" << ' ';
             if (roll() > 10) std::cout << generate_random_string(5) << ' ';
@@ -197,9 +197,7 @@ int main() {
     };
 
     std::uniform_int_distribution<> rind(0, commands.size() - 1);
-    
-    // Cambia la longitud del bucle para generar casos de prueba mas largos o mas cortos.
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 1000; i++) {
         commands[rind(gen)]();
     }
 
